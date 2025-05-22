@@ -54,6 +54,153 @@ trust.beyondmachines.net  --active, secure(A+), hosted by: Cloudflare, Inc., Tor
 [INF] Found 13 subdomains for beyondmachines.net in 22 seconds 466 milliseconds\
 
 
+For browsing the log I used the following as guidance:
+
+1. SQL Injection (SQLi) Attacks
+
+What to Look For:
+
+    Requests containing SQL keywords or special characters:
+
+        ' OR '1'='1 (basic bypass)
+
+        ' UNION SELECT (data extraction)
+
+        ; DROP TABLE (destructive commands)
+
+        ' OR SLEEP(5)-- (time-based blind SQLi)
+
+        ' AND 1=CONVERT(int, @@version)-- (error-based SQLi)
+
+    URLs or parameters with unusual encoding (e.g., %27 = ', %3B = ;)
+
+2. Cross-Site Scripting (XSS) Attacks
+
+What to Look For:
+
+    <script>, javascript:, onerror=, alert(, document.cookie
+
+    HTML-encoded payloads like &lt;script&gt; or %3Cscript%3E
+
+    Attempts to inject malicious scripts in:
+
+        Search queries (/search?q=<script>alert(1)</script>)
+
+        Form inputs (/comment?text=<img src=x onerror=alert(1)>)
+
+3. Directory Traversal / File Inclusion
+
+What to Look For:
+
+    Requests trying to access sensitive files:
+
+        ../../../etc/passwd (Linux password file)
+
+        ../../windows/win.ini (Windows system file)
+
+        /.env (environment variables)
+
+        /.git/HEAD (Git repository access)
+
+        /config.php (PHP configuration files)
+
+4. Command Injection
+
+What to Look For:
+
+    Attempts to execute system commands:
+
+        ; ls -la (list directory contents)
+
+        | cat /etc/passwd (read system files)
+
+        $(whoami) (execute shell commands)
+
+        %3Bcat+/etc/passwd (URL-encoded command)
+
+5. Brute Force & Credential Stuffing
+
+What to Look For:
+
+    Repeated login attempts to:
+
+        /admin/login.php
+
+        /wp-login.php (WordPress)
+
+        /user/login
+
+    Rapid-fire POST requests with different credentials
+
+    Use of common usernames (admin, root, test)
+
+6. Web Shell Upload & Execution
+
+What to Look For:
+
+    Unusual file uploads to /uploads/:
+
+        shell.php, backdoor.php, cmd.jsp
+
+    POST requests to unexpected scripts
+
+    Strange file extensions (.phtml, .ashx, .jspx)
+
+7. Sensitive File & Admin Panel Scanning
+
+What to Look For:
+
+    Requests to known vulnerable paths:
+
+        /admin/, /phpmyadmin/, /wp-admin/
+
+        /backup.sql, /database.zip
+
+        /robots.txt (often reveals hidden paths)
+
+    404 errors for admin-related files
+
+8. Unusual User Agents & Automated Tools
+
+What to Look For:
+
+    Known hacking tools in User-Agent:
+
+        sqlmap (SQL injection tool)
+
+        nikto (vulnerability scanner)
+
+        nmap (port scanner)
+
+        Metasploit (exploitation framework)
+
+    Generic or missing User-Agent strings
+
+9. HTTP Parameter Pollution & Bypass Attempts
+
+What to Look For:
+
+    Duplicate parameters (?id=1&id=2)
+
+    Null bytes (%00) in URLs
+
+    Case tampering (AdMiN instead of admin)
+
+    Path traversal (/admin/../etc/passwd)
+
+10. API Abuse & Unauthorized Access
+
+What to Look For:
+
+    Unusual API endpoints being accessed:
+
+        /api/users (data scraping)
+
+        /api/admin (privileged access)
+
+    Excessive requests to /api/products (data harvesting)
+
+    Missing authentication headers (Authorization: Bearer)
 
 104.28.97.142 - - [06/May/2025:08:14:16 +0000] "GET /assets/js/script.js HTTP/1.1" 200 24689 "https://companyxyz.com/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML
 
