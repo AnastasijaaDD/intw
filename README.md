@@ -37,7 +37,7 @@ beyondmachines.net      nameserver = ns-2019.awsdns-60.co.uk\
 beyondmachines.net      nameserver = ns-1025.awsdns-00.org\
 
 Using subfinder, and then the "subfinder -d https://beyondmachines.net/" command in command prompt, I found the following subdomains, and with the ping command I checked if they are active\
-used ssllabs to check for security and hosting checker for where it is hosted.
+used ssllabs to check for security and hosting checker for where it is hosted.\
 damascian.beyondmachines.net ---inactive\
 challenge.beyondmachines.net  ---active, secure (A), hosted by:  Fastly, Inc, San Francisco, US\
 yieldcat.beyondmachines.net ---- active, secure (A), hosted by: Render, San Francisco, US\
