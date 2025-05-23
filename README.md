@@ -1,9 +1,6 @@
 Using nslookup in windows command prompt for a basic lookup I got the following results:
 
 
-Server:  UnKnown\
-Address:  192.168.0.1
-
 Non-authoritative answer:\
 beyondmachines.net      internet address = 3.164.85.66\
 beyondmachines.net      internet address = 3.164.85.78\
